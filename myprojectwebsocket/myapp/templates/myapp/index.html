@@ -1,0 +1,26 @@
+<!-- myapp/templates/myapp/index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <button onclick="sendMessage()">Send Message</button>
+    <script>
+        var ws = new WebSocket('ws://' + window.location.host + '/ws/somepath/');
+
+        ws.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+            console.log('Message from server: ', data.message);
+        };
+
+        function sendMessage() {
+            ws.send(JSON.stringify({
+                'message': 'Hello, WebSocket!'
+            }));
+        }
+    </script>
+</body>
+</html>
